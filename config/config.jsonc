@@ -13,14 +13,15 @@
 			"color": "",
 			"categoryId": "1188875852801388696",
 			"ticketNameOption": "🎫・USERNAME",
-			"customDescription": "> Welcome to the ZELTHORIAI SMP customer service system, through this channel, the team will provide assistance and clarify your doubts!",
+			"customDescription": "**Reason**\n > <:tick1:1244367270629605508> Click on the button below to open a ticket, and then select the correct reason for support!\n\n**Active times**\n> <:tick2:1244367269258199181> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> as <t:1716699600:t>, but be patient!\n\n**Warning**\n> <:tick3:1244367267672752180> In order to avoid more problems, if you have a complaint, you need to file it within 7 days after the incident or it will not be valid\n",
 			"cantAccess": [],
 			"askQuestions": true,
 			"questions": [
 				{
 					"label": "What is the reason of the ticket?",
 					"placeholder": "Please enter the reason",
-					"style": "PARAGRAPH"
+					"style": "PARAGRAPH",
+					"maxLength": 1000
 				}
 			],
 			"staffRoles": []

@@ -54,7 +54,7 @@ export default class ReadyEvent extends BaseEvent {
 		const locale = this.client.locales;
 		let footer = locale.getSubValue("embeds", "openTicket", "footer", "text").replace("ticket.pm", "");
 		// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
-		footer = `ticket.pm ${footer.trim() !== "" ? `- ${footer}` : ""}`; // Please respect the LICENSE :D
+		footer = `${footer.trim() !== "" ? `- ${footer}` : ""}`; // Please respect the LICENSE :D
 		// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
 		const embed = new EmbedBuilder({
 			...locale.getSubRawValue("embeds.openTicket") as object,
@@ -64,13 +64,11 @@ export default class ReadyEvent extends BaseEvent {
 				locale.getNoErrorSubValue("embeds", "openTicket", "color") as ColorResolvable | undefined ??
 				this.client.config.mainColor
 			)
-			.setFooter({
-				text: footer,
-				iconURL: locale.getNoErrorSubValue("embeds.openTicket.footer.iconURL")
-			});
+			.setThumbnail('https://zelthoriaismp.cloud/Bot/logo.png')
+			.setImage('https://zelthoriaismp.cloud/Bot/ticket.png')
 
 		const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
-			new ButtonBuilder().setCustomId("openTicket").setLabel(this.client.locales.getSubValue("other", "openTicketButtonMSG")).setStyle(ButtonStyle.Primary)
+			new ButtonBuilder().setCustomId("openTicket").setLabel(this.client.locales.getSubValue("other", "openTicketButtonMSG")).setStyle(ButtonStyle.Secondary)
 		);
 
 		try {

@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.github",
+    "\\.github\\workflows",
+    "\\config",
+    "\\locales",
+    "\\prisma",
+    "\\src",
+    "\\src\\commands",
+    "\\src\\events",
+    "\\src\\structure",
+    "\\src\\utils"
+  ],
+  "SelectedNode": "\\locales\\main.json",
+  "PreviewInSolutionExplorer": false
+}
