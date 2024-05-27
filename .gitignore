@@ -1,10 +1,9 @@
 node_modules
 dist
-*.db
-
-
 test.sql
 __pycache__/
 *.py[cod]
 local_settings.py
 .venv
+.env
+.env
