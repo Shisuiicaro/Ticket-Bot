@@ -105,6 +105,8 @@ export const createTicket = async (interaction: StringSelectMenuInteraction | Mo
 			color: 0,
 		})
 			.setColor(ticketType.color ?? client.config.mainColor)
+			.setThumbnail('https://zelthoriaismp.cloud/Bot/logo.png')
+			.setImage('https://zelthoriaismp.cloud/Bot/ticket.png')
 			.setTitle(locale.getSubValue("embeds", "ticketOpened", "title").replace("CATEGORYNAME", ticketType.name))
 			.setDescription(
 				ticketType.customDescription
@@ -139,7 +141,7 @@ export const createTicket = async (interaction: StringSelectMenuInteraction | Mo
 			)
 			.setFooter({
 				// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
-				text: `ticket.pm ${footer.trim() !== "" ? `- ${footer}` : ""}`, // Please respect the LICENSE :D
+				text: `By: Hasta Studios ${footer.trim() !== "" ? `- ${footer}` : ""}`, // Please respect the LICENSE :D
 				// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
 				iconURL: locale.getNoErrorSubValue("embeds", "ticketOpened", "footer", "iconUrl")
 			});
@@ -179,7 +181,7 @@ export const createTicket = async (interaction: StringSelectMenuInteraction | Mo
 		const body = {
 			embeds: [ticketOpenedEmbed],
 			content: `<@${interaction.user.id}> ${
-				client.config.pingRoleWhenOpened ? client.config.roleToPingWhenOpenedId.map((x) => `<@&${x}>`).join(", ") : ""
+				client.config.pingRoleWhenOpened ? client.config.roleToPingWhenOpenedId.map((x) => `@${x}`).join(", ") : ""
 			}`,
 			components: [] as ActionRowBuilder<ButtonBuilder>[],
 		};

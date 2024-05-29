@@ -2,7 +2,7 @@
 	"embeds": {
 		"openTicket": {
 			"title": "ZSMP TICKET SYSTEM",
-			"description": "**Reason**\n > <:tick1:1244367270629605508> Click on the button below to open a ticket, and then select the correct reason for support!\n\n**Active times**\n> <:tick2:1244367269258199181> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> to <t:1716699600:t>, but be patient!\n\n**Warning**\n> <:tick3:1244367267672752180> In order to avoid more problems, if you have a complaint, you need to file it within 7 days after the incident or it will not be valid\n",
+			"description": "<:tick1:1244367270629605508> **Reason:**\n> Click on the button below to open a ticket, and then select the correct reason for support!\n\n\n<:tick2:1244367269258199181>  **Active times**\n> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> as <t:1716699600:t>, but be patient!\n\n <:tick3:1244367267672752180>  **Warning**\n> In order to avoid more problems, if you have a complaint, you need to file it within 7 days after the incident or it will not be valid",
 			"footer": {
 				"text": "By: Hasta Studios"
 			}
@@ -11,18 +11,18 @@
 			"title": "Ticket CATEGORYNAME",
 			"description": "A staff will reply you as soon as possible!",
 			"footer": {
-				"text": "ticket.pm"
+				"text": "By: Hasta Studios"
 			}
 		},
 		"ticketClosed": {
 			"title": "Ticket closed",
-			"description": "The ticket has been closed by CLOSERNAME with the following reason: `REASON`"
+			"description": "The ticket has been closed by CLOSERNAME with the following reason: ```REASON```"
 		},
 		"ticketClosedDM": {
 			"title": "Ticket closed",
 			"description": "The ticket n°TICKETCOUNT has been closed by CLOSERNAME with the following reason: `REASON`\n\nHere is the transcript of the ticket: TRANSCRIPTURL",
 			"footer": {
-				"text": "ticket.pm"
+				"text": "By: Hasta Studios"
 			}
 		}
 	},
@@ -41,11 +41,11 @@
 	"buttons": {
 		"close": {
 			"label": "Close ticket",
-			"emoji": "🔒"
+			"emoji": "<:tickclose:1244852497441488988>"
 		},
 		"claim": {
 			"label": "Claim",
-			"emoji": "🙋"
+			"emoji": "<:ticketclaim:1244854063800123442>"
 		}
 	},
 	"invalidConfig": "Invalid configuration detected, please ask the bot operator to fix it!",

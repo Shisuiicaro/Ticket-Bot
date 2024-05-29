@@ -9,11 +9,11 @@
 			"codeName": "general-support",
 			"name": "General Support",
 			"description": "Ticket for general purposes",
-			"emoji": "⚙️",
+			"emoji": "<:general:1245490282242244669>",
 			"color": "",
 			"categoryId": "1188875852801388696",
 			"ticketNameOption": "🎫・USERNAME",
-			"customDescription": "**Reason**\n > <:tick1:1244367270629605508> Click on the button below to open a ticket, and then select the correct reason for support!\n\n**Active times**\n> <:tick2:1244367269258199181> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> as <t:1716699600:t>, but be patient!\n\n**Warning**\n> <:tick3:1244367267672752180> In order to avoid more problems, if you have a complaint, you need to file it within 7 days after the incident or it will not be valid\n",
+			"customDescription": "<:tick2:1244367269258199181>  **Active times**\n> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> as <t:1716699600:t>, but be patient!\n\n <:tick3:1244367267672752180>  **Warning**\n> In order to avoid more problems, if you have a complaint, you need to file it within 7 days after the incident or it will not be valid\n\n<:tick5:1244843047124992091>  **Reason**:\n > ```REASON1```",
 			"cantAccess": [],
 			"askQuestions": true,
 			"questions": [
@@ -21,64 +21,91 @@
 					"label": "What is the reason of the ticket?",
 					"placeholder": "Please enter the reason",
 					"style": "PARAGRAPH",
-					"maxLength": 1000
+					"maxLength": 300
 				}
 			],
 			"staffRoles": []
 		},
 		{
-			"codeName": "category-two",
-			"name": "Category Two",
-			"description": "Description of Category Two",
-			"emoji": "🛑",
-			"color": "#f8312f",
+			"codeName": "roleplay-two",
+			"name": "Roleplay",
+			"description": "Ticket for roleplay related subjects",
+			"emoji": "<:rp:1245490278916161546>",
+			"color": "",
 			"categoryId": "1188876283032113216",
 			"ticketNameOption": "🎫・USERNAME",
-			"customDescription": "Please explain your report in detail. If you have any images, please attach them to your message.",
+			"customDescription": "<:tick2:1244367269258199181>  **Active times**\n> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> as <t:1716699600:t>, but be patient!\n\n <:tick3:1244367267672752180>  **Warning**\n> In order to avoid more problems, if you have a complaint, you need to file it within 7 days after the incident or it will not be valid\n\n<:tick5:1244843047124992091>  **Nickname**:\n > ```REASON1```\n\n<:tick5:1244843047124992091>  **Reason**:\n > ```REASON2``",
 			"cantAccess": [],
 			"askQuestions": true,
 			"questions": [
 				{
+					"label": "What is your minecraft nickname?",
+					"placeholder": "Ex: Shisuys",
+					"style": "SHORT",
+					"maxLength": 300
+				},
+				{
 					"label": "What is the reason of the ticket?",
 					"placeholder": "Please enter the reason",
 					"style": "PARAGRAPH",
-					"maxLength": 1000
+					"maxLength": 300
 				}
 			],
 			"staffRoles": []
 		},
 		{
-			"codeName": "other",
-			"name": "Other",
-			"description": "Description of Category Other",
-			"emoji": "",
+			"codeName": "donation",
+			"name": "Donate",
+			"description": "Ticket for donating for us",
+			"emoji": "<:donate:1245498045521592370>",
 			"color": "",
-			"categoryId": "1111111111111111111",
-			"ticketNameOption": "",
-			"customDescription": "Thank you for your ticket, a staff will reply to you as soon as possible\n\n__**What is the reason for the ticket?**__: REASON1",
+			"categoryId": "1188876283032113216",
+			"ticketNameOption": "🎫・USERNAME",
+			"customDescription": "<:tick2:1244367269258199181>  **Active times**\n> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> as <t:1716699600:t>, but be patient!\n\n <:tick3:1244367267672752180>  **Warning**\n> Plaese, make sure you have read the <#1198071711887806544> before making any donation!\n\n<:donate:1245498045521592370> **Payment methods**\n> Paypal: yuushizukun@gmail.com\n> Pix: (61) 991936167\n\n<:nick:1245498443506647133>  **Nickname**:\n > ```REASON1```",
+			"cantAccess": [],
+			"askQuestions": true,
+			"questions": [
+				{
+					"label": "What is your minecraft nickname?",
+					"placeholder": "Ex: Shisuys",
+					"style": "SHORT",
+					"maxLength": 300
+				}
+			],
+			"staffRoles": []
+		},
+		{
+			"codeName": "partnership",
+			"name": "Partnership",
+			"description": "Ticket to become a partner of the server",
+			"emoji": "<:partner:1245490280707129344>",
+			"color": "",
+			"categoryId": "1188876283032113216",
+			"ticketNameOption": "🎫・USERNAME",
+			"customDescription": "<:tick2:1244367269258199181>  **Active times**\n> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> as <t:1716699600:t>, but be patient!\n\n <:tick3:1244367267672752180>  **Warning**\n> In order to avoid more problems, if you have a complaint, you need to file it within 7 days after the incident or it will not be valid\n\n<:tick5:1244843047124992091>  **invite link:**:\n > ```REASON1```",
 			"cantAccess": [],
 			"askQuestions": true,
 			"staffRoles": [],
 			"questions": [
 				{
-					"label": "What is the reason of the ticket?",
-					"placeholder": "Please enter the reason",
-					"style": "PARAGRAPH",
-					"maxLength": 1000
+					"label": "PLese provide your server invite",
+					"placeholder": "https://discord.gg/yourlink",
+					"style": "SHORT",
+					"maxLength": 300
 				}
 			]
 		}
 	],
-	"ticketNameOption": "Ticket-TICKETCOUNT",
+	"ticketNameOption": "🎫・USERNAME",
 	"claimOption": {
 		"claimButton": true,
-		"nameWhenClaimed": "✔️ Ticket-TICKETCOUNT",
+		"nameWhenClaimed": "✅・U_USERNAME",
 		"categoryWhenClaimed": ""
 	},
 	"rolesWhoHaveAccessToTheTickets": [ "1131117615692132393", "1131440616354615326", "1139301806623703100" ],
 	"rolesWhoCanNotCreateTickets": [],
 	"pingRoleWhenOpened": true,
-	"roleToPingWhenOpenedId": [ "1113605430644588596" ],
+	"roleToPingWhenOpenedId": [ "everyone" ],
 	"logs": true,
 	"logsChannelId": "1179131411568013333",
 	"closeOption": {
@@ -92,9 +119,9 @@
 	"uuidType": "uuid",
 	"status": {
 		"enabled": true,
-		"text": "https://discord.gg/zsmp",
-		"type": "PLAYING",
-		"url": "Island of zelthoriai",
+		"text": "discord.gg/zsmp",
+		"type": "LISTENING",
+		"url": "htts://discord.gg/zsmp",
 		"status": "online"
 	},
 	"maxTicketOpened": 2,

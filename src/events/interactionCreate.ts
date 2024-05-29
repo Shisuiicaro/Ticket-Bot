@@ -139,48 +139,45 @@ export default class InteractionCreateEvent extends BaseEvent {
 			}
 		}
 
-		if (interaction.isStringSelectMenu()) {
-			if (interaction.customId === "selectTicketType") {
-				if (this.client.config.maxTicketOpened > 0) {
-					const ticketsOpened = (await this.client.prisma.$queryRaw<[{count: bigint}]>
-					`SELECT COUNT(*) as count FROM tickets WHERE closedby IS NULL AND creator = ${interaction.user.id}`)[0].count;
-					// If maxTicketOpened is 0, it means that there is no limit
-					if (ticketsOpened >= this.client.config.maxTicketOpened) {
-						interaction
-							.reply({
-								content: this.client.locales.getValue("ticketLimitReached").replace("TICKETLIMIT", this.client.config.maxTicketOpened.toString()),
-								ephemeral: true,
-							})
-							.catch((e) => console.log(e));
-						return;
-					}
-				}
+if (interaction.isStringSelectMenu()) {
+    if (interaction.customId === "selectTicketType") {
+        if (this.client.config.maxTicketOpened > 0) {
+            const ticketsOpened = (await this.client.prisma.$queryRaw<[{ count: bigint }]>`
+                SELECT COUNT(*) as count FROM tickets WHERE closedby IS NULL AND creator = ${interaction.user.id}`)[0].count;
+            if (ticketsOpened >= this.client.config.maxTicketOpened) {
+                interaction.reply({
+                    content: this.client.locales.getValue("ticketLimitReached").replace("TICKETLIMIT", this.client.config.maxTicketOpened.toString()),
+                    ephemeral: true,
+                }).catch((e) => console.log(e));
+                return;
+            }
+        }
 
-				const ticketType = this.client.config.ticketTypes.find((x) => x.codeName === interaction.values[0]);
-				if (!ticketType) return console.error(`Ticket type ${interaction.values[0]} not found!`);
-				if (ticketType.askQuestions) {
-					// Sanity Check
-					const qCount = ticketType.questions.length;
-					if(qCount === 0 || qCount > 5)
-						throw new Error(`${ticketType.codeName} has either no questions or exceeded 5 questions. Check your config and restart the bot`);
+        const ticketType = this.client.config.ticketTypes.find((x) => x.codeName === interaction.values[0]);
+        if (!ticketType) return console.error(`Ticket type ${interaction.values[0]} not found!`);
+        if (ticketType.askQuestions) {
+            const qCount = ticketType.questions.length;
+            if (qCount === 0 || qCount > 5) throw new Error(`${ticketType.codeName} has either no questions or exceeded 5 questions. Check your config and restart the bot`);
 
-					const modal = new ModalBuilder().setCustomId("askReason").setTitle(this.client.locales.getSubValue("modals", "reasonTicketOpen", "title"));
-					for (const question of ticketType.questions) {
-						const index = ticketType.questions.indexOf(question);
-						const input = new TextInputBuilder()
-							.setCustomId(`input_${interaction.values[0]}_${index}`)
-							.setLabel(question.label)
-							.setStyle(question.style == "SHORT" ? TextInputStyle.Short : TextInputStyle.Paragraph)
-							.setPlaceholder(question.placeholder)
-							.setMaxLength(question.maxLength);
+            const modal = new ModalBuilder()
+                .setCustomId("askReason")
+                .setTitle(this.client.locales.getSubValue("modals", "reasonTicketOpen", "title"));
 
-						const firstActionRow = new ActionRowBuilder<TextInputBuilder>().addComponents(input);
-						modal.addComponents(firstActionRow);
-					}
+            ticketType.questions.forEach((question, index) => {
+                const input = new TextInputBuilder()
+                    .setCustomId(`input_${interaction.values[0]}_${index}`)
+                    .setLabel(question.label)
+                    .setStyle(question.style === "SHORT" ? TextInputStyle.Short : TextInputStyle.Paragraph)
+                    .setPlaceholder(question.placeholder)
+                    .setMaxLength(question.maxLength);
 
-					await interaction.showModal(modal).catch((e) => console.log(e));
-				} else {
-					createTicket(interaction, this.client, ticketType, this.client.locales.getSubValue("other", "noReasonGiven"));
+                const actionRow = new ActionRowBuilder<TextInputBuilder>().addComponents(input);
+                modal.addComponents(actionRow);
+            });
+
+            await interaction.showModal(modal).catch((e) => console.log(e));
+        } else {
+            createTicket(interaction, this.client, ticketType, this.client.locales.getSubValue("other", "noReasonGiven"));
 				}
 			}
 

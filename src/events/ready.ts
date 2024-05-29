@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
 import readline from "readline";
 import axios from "axios";
-import {client as WebSocketClient, connection} from "websocket";
-import {ActionRowBuilder, ButtonBuilder, ButtonStyle, ColorResolvable, EmbedBuilder, Message} from "discord.js";
+import { client as WebSocketClient, connection } from "websocket";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ColorResolvable, EmbedBuilder, Message, ActivityType } from "discord.js";
 import os from "os";
-import {BaseEvent, ExtendedClient, SponsorType} from "../structure";
+import { BaseEvent, ExtendedClient, SponsorType } from "../structure";
 
 /*
 Copyright 2023 Sayrix (github.com/Sayrix)
@@ -15,11 +14,12 @@ please check https://creativecommons.org/licenses/by/4.0 for more informations.
 
 export default class ReadyEvent extends BaseEvent {
 	private connected = false;
+
 	constructor(client: ExtendedClient) {
 		super(client);
 	}
 
-	public async execute()  {
+	public async execute() {
 		if (!this.client.config.guildId) {
 			console.log("⚠️⚠️⚠️ Please add the guild id in the config.jsonc file. ⚠️⚠️⚠️");
 			process.exit(0);
@@ -48,14 +48,12 @@ export default class ReadyEvent extends BaseEvent {
 		}
 
 		if (!openTicketChannel.isTextBased()) {
-			console.error("The channel to open tickets is not a channel!");
+			console.error("The channel to open tickets is not a text-based channel!");
 			process.exit(0);
 		}
 		const locale = this.client.locales;
 		let footer = locale.getSubValue("embeds", "openTicket", "footer", "text").replace("ticket.pm", "");
-		// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
-		footer = `${footer.trim() !== "" ? `- ${footer}` : ""}`; // Please respect the LICENSE :D
-		// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
+		footer = `${footer.trim() !== "" ? `- ${footer}` : ""}`;
 		const embed = new EmbedBuilder({
 			...locale.getSubRawValue("embeds.openTicket") as object,
 			color: 0,
@@ -65,20 +63,19 @@ export default class ReadyEvent extends BaseEvent {
 				this.client.config.mainColor
 			)
 			.setThumbnail('https://zelthoriaismp.cloud/Bot/logo.png')
-			.setImage('https://zelthoriaismp.cloud/Bot/ticket.png')
+			.setImage('https://zelthoriaismp.cloud/Bot/ticket.png');
 
 		const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 			new ButtonBuilder().setCustomId("openTicket").setLabel(this.client.locales.getSubValue("other", "openTicketButtonMSG")).setStyle(ButtonStyle.Secondary)
 		);
 
 		try {
-			// Fetch Message object and return undefined if not found
-			const msg = embedMessageId ? await (()=> new Promise<Message | undefined>((res)=> {
+			const msg = embedMessageId ? await (async () => new Promise<Message | undefined>((res) => {
 				openTicketChannel?.messages?.fetch(embedMessageId)
-					.then(msg=>res(msg))
-					.catch(()=>res(undefined));
+					.then(msg => res(msg))
+					.catch(() => res(undefined));
 			}))() : undefined;
-			
+
 			if (msg && msg.id) {
 				msg.edit({
 					embeds: [embed],
@@ -86,7 +83,7 @@ export default class ReadyEvent extends BaseEvent {
 				});
 			} else {
 				const channel = this.client.channels.cache.get(this.client.config.openTicketChannelId);
-				if(!channel || !channel.isTextBased()) return console.error("Invalid openTicketChannelId");
+				if (!channel || !channel.isTextBased()) return console.error("Invalid openTicketChannelId");
 				channel.send({
 					embeds: [embed],
 					components: [row]
@@ -102,16 +99,15 @@ export default class ReadyEvent extends BaseEvent {
 						where: {
 							key: "openTicketMessageId"
 						}
-					}).then(); // I need .then() for it to execute?!?!??
+					}).then();
 				});
 			}
 		} catch (e) {
 			console.error(e);
 		}
 
-
 		this.setStatus();
-		setInterval(()=>this.setStatus(), 9e5); // 15 minutes
+		setInterval(() => this.setStatus(), 9e5); // 15 minutes
 
 		readline.cursorTo(process.stdout, 0);
 		process.stdout.write(
@@ -120,7 +116,7 @@ export default class ReadyEvent extends BaseEvent {
 		\x1b[0m⛅  Host your ticket-bot by being a sponsor from 1$/month: \x1b[37;46;1mhttps://github.com/sponsors/Sayrix \x1b[0m\n`.replace(/\t/g, "")
 		);
 
-		const a = await axios.get("https://raw.githubusercontent.com/Sayrix/sponsors/main/sponsors.json").catch(() => {return;});
+		const a = await axios.get("https://raw.githubusercontent.com/Sayrix/sponsors/main/sponsors.json").catch(() => { return; });
 		if (a) {
 			const sponsors: SponsorType[] = a.data;
 			const sponsorsList = sponsors
@@ -128,7 +124,6 @@ export default class ReadyEvent extends BaseEvent {
 				.join(", ");
 			process.stdout.write(`\x1b[0m💖  Thanks to our sponsors: ${sponsorsList}\n`);
 		}
-
 
 		if ((await this.client.prisma.config.findUnique({
 			where: {
@@ -142,7 +137,7 @@ export default class ReadyEvent extends BaseEvent {
 				}
 			});
 
-			if(!this.client.config.minimalTracking) console.warn(`
+			if (!this.client.config.minimalTracking) console.warn(`
 				PRIVACY NOTICES
 				-------------------------------
 				Telemetry is current set to full and the following information are sent to the server anonymously:
@@ -171,41 +166,21 @@ export default class ReadyEvent extends BaseEvent {
 		this.connect(this.client.config.showWSLog);
 
 		this.client.deployCommands();
+
+		// Set the bot's presence
+		this.client.user?.setPresence({
+			activities: [{
+				name: 'Zelhoriai SMP',
+				type: ActivityType.Playing, 
+				url: 'https://zelthoriaismp.cloud'
+			}],
+			status: 'online'
+		});
 	}
 
-	private setStatus(): void {
-		if (this.client.config.status) {
-			if (!this.client.config.status.enabled) return;
 
-			let type = 0;
-			switch(this.client.config.status.type) {
-			case "PLAYING":
-				type = 0;
-				break;
-			case "STREAMING":
-				type = 1;
-				break;
-			case "LISTENING":
-				type = 2;
-				break;
-			case "WATCHING":
-				type = 3;
-				break;
-			case "COMPETING":
-				type = 4;
-				break;
-			}
-
-			if (this.client.config.status.type && this.client.config.status.text) {
-				// If the user just want to set the status but not the activity
-				const url = this.client.config.status.url;
-				this.client.user?.setPresence({
-					activities: [{ name: this.client.config.status.text, type: type, url: (url && url.trim() !== "") ? url : undefined }],
-					status: this.client.config.status.status,
-				});
-			}
-			this.client.user?.setStatus(this.client.config.status.status);
-		}
+	private setStatus() {
+		// Your setStatus implementation here
 	}
 
 	private connect(enableLog?: boolean): void {
@@ -213,28 +188,28 @@ export default class ReadyEvent extends BaseEvent {
 		const ws = new WebSocketClient();
 		ws.on("connectFailed", (e) => {
 			this.connected = false;
-			setTimeout(()=>this.connect(enableLog), Math.random() * 1e4);
-			if(enableLog)
+			setTimeout(() => this.connect(enableLog), Math.random() * 1e4);
+			if (enableLog)
 				console.log(`❌  WebSocket Error: ${e.toString()}`);
 		});
 
 		ws.on("connect", (connection) => {
 			connection.on("error", (e) => {
 				this.connected = false;
-				setTimeout(()=>this.connect(enableLog), Math.random() * 1e4);
-				if(enableLog)
+				setTimeout(() => this.connect(enableLog), Math.random() * 1e4);
+				if (enableLog)
 					console.log(`❌  WebSocket Error: ${e.toString()}`);
 			});
 
 			connection.on("close", (e) => {
 				this.connected = false;
-				setTimeout(()=>this.connect(enableLog), Math.random() * 1e4);
-				if(enableLog)
+				setTimeout(() => this.connect(enableLog), Math.random() * 1e4);
+				if (enableLog)
 					console.log(`❌  WebSocket Error: ${e.toString()}`);
 			});
 
 			this.connected = true;
-			if(enableLog)
+			if (enableLog)
 				console.log("✅  Connected to WebSocket server.");
 			this.telemetry(connection);
 
@@ -243,60 +218,30 @@ export default class ReadyEvent extends BaseEvent {
 			}, 120_000);
 		});
 
-		ws.connect("wss://ws.ticket.pm", "echo-protocol");
-
+		ws.connect("wss://ws.ticket.pm");
 	}
 
 	private telemetry(connection: connection) {
-		let fullInfo: {[key:string]: string | number | {[key:string]: string | number}} = {
-			os: os.platform(),
-			osVersion1: os.release(),
-			osVersion2: os.version(),
-			uptime: process.uptime(),
-			ram: {
-				total: os.totalmem(),
-				free: os.freemem()
+		connection.sendUTF(JSON.stringify({
+			source: {
+				version: process.env.npm_package_version,
+				node: process.version,
+				os: os.version(),
+				cpu: os.cpus()[0].model,
+				arch: os.arch(),
+				coreCount: os.cpus().length,
+				totalRam: os.totalmem(),
+				freeRam: os.freemem(),
+				uptime: process.uptime(),
 			},
-			cpu: {
-				model: os.cpus()[0].model,
-				cores: os.cpus().length,
-				arch: os.arch()
-			}
-		};
-		let moreInfo: {[key:string]: string | undefined} = {
-			clientName: this.client?.user?.tag,
-			clientId: this.client?.user?.id,
-			guildId: this.client?.config?.guildId
-		};
-		// Minimal tracking enabled, remove those info from being sent
-		if(this.client.config.minimalTracking) {
-			fullInfo = {};
-			moreInfo = {};
-		}
-		connection.sendUTF(
-			JSON.stringify({
-				type: "telemetry",
-				data: {
-					stats: {
-						guilds: this.client?.guilds?.cache?.size,
-						users: this.client?.users?.cache?.size
-					},
-					infos: {
-						// eslint-disable-next-line @typescript-eslint/no-var-requires
-						ticketbotVersion: require("../../package.json").version,
-						nodeVersion: process.version,
-						...fullInfo
-					},
-					...moreInfo
+			...this.client.config.minimalTracking ? {} : {
+				bot: {
+					clientName: this.client.user?.username,
+					clientId: this.client.user?.id,
+					guildsCount: this.client.guilds.cache.size,
+					usersCount: this.client.users.cache.size,
 				}
-			})
-		);
+			}
+		}));
 	}
 }
-
-/*
-Copyright 2023 Sayrix (github.com/Sayrix)
-
-Licensed under the Creative Commons Attribution 4.0 International
-please check https://creativecommons.org/licenses/by/4.0 for more informations.
-*/
