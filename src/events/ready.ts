@@ -1,9 +1,11 @@
-import readline from "readline";
+import { ActivityType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ColorResolvable, Message, TextChannel } from "discord.js";
 import axios from "axios";
 import { client as WebSocketClient, connection } from "websocket";
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ColorResolvable, EmbedBuilder, Message, ActivityType } from "discord.js";
 import os from "os";
+import readline from "readline";
 import { BaseEvent, ExtendedClient, SponsorType } from "../structure";
+import { createRulesEmbed } from "./rulesEmbed";
+import { createlauncherEmbed } from "./launcherEmbed";
 
 /*
 Copyright 2023 Sayrix (github.com/Sayrix)
@@ -129,23 +131,24 @@ export default class ReadyEvent extends BaseEvent {
 			where: {
 				key: "firstStart",
 			}
-		})) === null) {
-			await this.client.prisma.config.create({
-				data: {
+		}))?.value !== "false") {
+			await this.client.prisma.config.update({
+				where: {
 					key: "firstStart",
-					value: "true",
-				}
+				},
+				data: {
+					value: "false",
+				},
 			});
 
-			if (!this.client.config.minimalTracking) console.warn(`
+			console.warn(`
 				PRIVACY NOTICES
 				-------------------------------
-				Telemetry is current set to full and the following information are sent to the server anonymously:
-				* Discord Bot's number of guilds & users
+				This bot tracks anonymous information:
 				* Current Source Version
 				* NodeJS Version
-				* OS Version
-				* CPU version, name, core count, architecture, and model
+				* CPU Information
+				* OS Information
 				* Current Process up-time
 				* System total ram and freed ram
 				* Client name and id
@@ -153,15 +156,14 @@ export default class ReadyEvent extends BaseEvent {
 				-------------------------------
 				If you wish to minimize the information that are being sent, please set "minimalTracking" to true in the config
 		`.replace(/\t/g, ""));
-			else console.warn(`
-				PRIVACY NOTICES
-				-------------------------------
-				Minimal tracking has been enabled; the following information are sent anonymously:
-				* Current Source Version
-				* NodeJS Version
-				-------------------------------
+		} else console.warn(`
+			PRIVACY NOTICES
+			-------------------------------
+			Minimal tracking has been enabled; the following information are sent anonymously:
+			* Current Source Version
+			* NodeJS Version
+			-------------------------------
 		`.replace(/\t/g, ""));
-		}
 
 		this.connect(this.client.config.showWSLog);
 
@@ -176,11 +178,48 @@ export default class ReadyEvent extends BaseEvent {
 			}],
 			status: 'online'
 		});
+
+		// Call the method to send the rules embed
+		this.sendRulesEmbed();
+
+		// Call the method to send the launcher embed
+		this.sendLauncherEmbed();
 	}
 
+	private async sendRulesEmbed() {
+		const rulesChannelId = "1131863782398906410"; // ID do canal de regras
+		const rulesChannel = await this.client.channels.fetch(rulesChannelId).catch(() => {
+			console.error("The rules channel is not found!");
+			process.exit(0);
+		});
+		if (!rulesChannel || !rulesChannel.isTextBased()) {
+			console.error("The rules channel is not a text-based channel!");
+			process.exit(0);
+		}
+
+		const { embed, row } = createRulesEmbed();
+
+		(rulesChannel as TextChannel).send({ embeds: [embed], components: [row] });
+	}
+
+	private async sendLauncherEmbed() {
+		const launcherChannelId = "1131130693787861002"; // ID do canal do lançador
+		const launcherChannel = await this.client.channels.fetch(launcherChannelId).catch(() => {
+			console.error("The launcher channel is not found!");
+			process.exit(0);
+		});
+		if (!launcherChannel || !launcherChannel.isTextBased()) {
+			console.error("The launcher channel is not a text-based channel!");
+			process.exit(0);
+		}
+
+		const { embed, row } = createlauncherEmbed();
+
+		(launcherChannel as TextChannel).send({ embeds: [embed], components: [row] });
+	}
 
 	private setStatus() {
-		// Your setStatus implementation here
+		// Sua implementação de setStatus aqui
 	}
 
 	private connect(enableLog?: boolean): void {
@@ -238,10 +277,10 @@ export default class ReadyEvent extends BaseEvent {
 				bot: {
 					clientName: this.client.user?.username,
 					clientId: this.client.user?.id,
-					guildsCount: this.client.guilds.cache.size,
-					usersCount: this.client.users.cache.size,
+					guilds: this.client.guilds.cache.size,
+					users: this.client.users.cache.size,
 				}
-			}
+			},
 		}));
 	}
 }

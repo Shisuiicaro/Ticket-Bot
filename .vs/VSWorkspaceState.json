@@ -2,8 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\.github",
-    "\\.github\\workflows",
-    "\\config",
+    "\\.github\\ISSUE_TEMPLATE",
     "\\locales",
     "\\prisma",
     "\\src",
@@ -12,6 +11,6 @@
     "\\src\\structure",
     "\\src\\utils"
   ],
-  "SelectedNode": "\\locales\\main.json",
+  "SelectedNode": "\\src\\events\\launcherEmbed.ts",
   "PreviewInSolutionExplorer": false
 }
