@@ -105,8 +105,8 @@ export const createTicket = async (interaction: StringSelectMenuInteraction | Mo
 			color: 0,
 		})
 			.setColor(ticketType.color ?? client.config.mainColor)
-			.setThumbnail('https://zelthoriaismp.cloud/Bot/logo.png')
-			.setImage('https://zelthoriaismp.cloud/Bot/ticket.png')
+			.setThumbnail('https://hastastudios.com.br/Bot/logo.png')
+			.setImage('https://hastastudios.com.br/Bot/ticket.png')
 			.setTitle(locale.getSubValue("embeds", "ticketOpened", "title").replace("CATEGORYNAME", ticketType.name))
 			.setDescription(
 				ticketType.customDescription

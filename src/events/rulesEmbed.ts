@@ -5,8 +5,8 @@ export const createRulesEmbed = () => {
 		.setTitle("Server Rules")
 		.setDescription("> <:rules1:1247192890170544220> Click the button below to select the language of the rules document. Please read it carefully. **ALL** players need to read this, and if you don't, you might get banned soon.")
 		.setColor(7667867)
-		.setImage("https://zelthoriaismp.cloud/Bot/rules.png")
-		.setThumbnail("https://zelthoriaismp.cloud/Bot/logo.png")
+		.setImage("https://hastastudios.com.br/Bot/rules.png")
+		.setThumbnail("https://hastastudios.com.br/Bot/logo.png")
 		.setFooter({ text: "Zelthoriai smp official rules" });
 
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(

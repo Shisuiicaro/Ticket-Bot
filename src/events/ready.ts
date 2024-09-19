@@ -64,8 +64,8 @@ export default class ReadyEvent extends BaseEvent {
 				locale.getNoErrorSubValue("embeds", "openTicket", "color") as ColorResolvable | undefined ??
 				this.client.config.mainColor
 			)
-			.setThumbnail('https://zelthoriaismp.cloud/Bot/logo.png')
-			.setImage('https://zelthoriaismp.cloud/Bot/ticket.png');
+			.setThumbnail('https://hastastudios.com.br/Bot/logo.png')
+			.setImage('https://hastastudios.com.br/Bot/ticket.png');
 
 		const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 			new ButtonBuilder().setCustomId("openTicket").setLabel(this.client.locales.getSubValue("other", "openTicketButtonMSG")).setStyle(ButtonStyle.Secondary)
@@ -174,7 +174,7 @@ export default class ReadyEvent extends BaseEvent {
 			activities: [{
 				name: 'Zelhoriai SMP',
 				type: ActivityType.Playing, 
-				url: 'https://zelthoriaismp.cloud'
+				url: 'https://hastastudios.com.br'
 			}],
 			status: 'online'
 		});
