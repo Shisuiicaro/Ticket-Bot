@@ -25,7 +25,7 @@
 					"maxLength": 300
 				}
 			],
-			"staffRoles": []
+			"staffRoles": [ "1131117615692132393", "1131440616354615326", "1139301806623703100" ]
 		},
 		{
 			"codeName": "staff-report",
@@ -73,7 +73,7 @@
 					"maxLength": 300
 				}
 			],
-			"staffRoles": []
+			"staffRoles": [ "1131117615692132393", "1131440616354615326", "1139301806623703100" ]
 		},
 		{
 			"codeName": "donation",
@@ -94,7 +94,7 @@
 					"maxLength": 300
 				}
 			],
-			"staffRoles": []
+			"staffRoles": [ "1131117615692132393", "1131440616354615326", "1139301806623703100" ]
 		},
 		{
 			"codeName": "partnership",
@@ -107,7 +107,7 @@
 			"customDescription": "<:tick2:1244367269258199181>  **Active times**\n> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> as <t:1716699600:t>, but be patient!\n\n <:tick3:1244367267672752180>  **Warning**\n> In order to avoid more problems, if you have a complaint, you need to file it within 7 days after the incident or it will not be valid\n\n<:tick5:1244843047124992091>  **invite link:**:\n > ```REASON1```",
 			"cantAccess": [],
 			"askQuestions": true,
-			"staffRoles": [],
+			"staffRoles": [ "1131117615692132393", "1131440616354615326", "1139301806623703100" ],
 			"questions": [
 				{
 					"label": "PLese provide your server invite",
@@ -124,7 +124,7 @@
 		"nameWhenClaimed": "✅・U_USERNAME",
 		"categoryWhenClaimed": ""
 	},
-	"rolesWhoHaveAccessToTheTickets": [ "1131117615692132393", "1131440616354615326", "1139301806623703100"],
+	"rolesWhoHaveAccessToTheTickets": [],
 	"rolesWhoCanNotCreateTickets": [],
 	"pingRoleWhenOpened": true,
 	"roleToPingWhenOpenedId": [ "everyone" ],
