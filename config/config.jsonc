@@ -46,7 +46,7 @@
 					"maxLength": 300
 				}
 			],
-			"staffRoles": [1131117615692132393]
+			"staffRoles": ["1131117615692132393"]
 		},
 		{
 			"codeName": "roleplay-two",
@@ -102,7 +102,7 @@
 			"description": "Ticket to become a partner of the server",
 			"emoji": "<:partner:1245490280707129344>",
 			"color": "",
-			"categoryId": "1293015483209224305",
+			"categoryId": "1293015483209224305		",
 			"ticketNameOption": "🎫・USERNAME",
 			"customDescription": "<:tick2:1244367269258199181>  **Active times**\n> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> as <t:1716699600:t>, but be patient!\n\n <:tick3:1244367267672752180>  **Warning**\n> In order to avoid more problems, if you have a complaint, you need to file it within 7 days after the incident or it will not be valid\n\n<:tick5:1244843047124992091>  **invite link:**:\n > ```REASON1```",
 			"cantAccess": [],
