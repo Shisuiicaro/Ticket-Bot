@@ -28,6 +28,27 @@
 			"staffRoles": []
 		},
 		{
+			"codeName": "staff-report",
+			"name": "Staff report",
+			"description": "Ticket for reporting a staff member",
+			"emoji": "<:warn:1247214745229197313>",
+			"color": "",
+			"categoryId": "1293014640871084083",
+			"ticketNameOption": "🎫・USERNAME",
+			"customDescription": "<:tick2:1244367269258199181>  **Active times**\n> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> as <t:1716699600:t>, but be patient!\n\n <:tick3:1244367267672752180>  **Warning**\n> In order to avoid more problems, if you have a complaint, you need to file it within 7 days after the incident or it will not be valid\n\n<:tick5:1244843047124992091>  **Reason**:\n > ```REASON1```",
+			"cantAccess": [],
+			"askQuestions": true,
+			"questions": [
+				{
+					"label": "What is the reason of the ticket?",
+					"placeholder": "Please enter the reason",
+					"style": "PARAGRAPH",
+					"maxLength": 300
+				}
+			],
+			"staffRoles": [1131117615692132393]
+		},
+		{
 			"codeName": "roleplay-two",
 			"name": "Roleplay",
 			"description": "Ticket for roleplay related subjects",
@@ -81,7 +102,7 @@
 			"description": "Ticket to become a partner of the server",
 			"emoji": "<:partner:1245490280707129344>",
 			"color": "",
-			"categoryId": "1188876283032113216",
+			"categoryId": "1293015483209224305",
 			"ticketNameOption": "🎫・USERNAME",
 			"customDescription": "<:tick2:1244367269258199181>  **Active times**\n> Our dedicated staff team is ready to support you in the following times: <t:1716724800:t> as <t:1716699600:t>, but be patient!\n\n <:tick3:1244367267672752180>  **Warning**\n> In order to avoid more problems, if you have a complaint, you need to file it within 7 days after the incident or it will not be valid\n\n<:tick5:1244843047124992091>  **invite link:**:\n > ```REASON1```",
 			"cantAccess": [],
@@ -103,7 +124,7 @@
 		"nameWhenClaimed": "✅・U_USERNAME",
 		"categoryWhenClaimed": ""
 	},
-	"rolesWhoHaveAccessToTheTickets": [ "1131117615692132393", "1131440616354615326", "1139301806623703100" ],
+	"rolesWhoHaveAccessToTheTickets": [ "1131117615692132393", "1131440616354615326", "1139301806623703100"],
 	"rolesWhoCanNotCreateTickets": [],
 	"pingRoleWhenOpened": true,
 	"roleToPingWhenOpenedId": [ "everyone" ],
@@ -125,7 +146,7 @@
 		"url": "htts://discord.gg/zsmp",
 		"status": "online"
 	},
-	"maxTicketOpened": 2,
+	"maxTicketOpened": 3,
 	"minimalTracking": false,
 	"showWSLog": false
 }
