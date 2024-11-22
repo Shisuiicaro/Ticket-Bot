@@ -51,9 +51,9 @@ export default class ReadyEvent extends BaseEvent {
 			process.exit(0);
 		}
 		const locale = this.client.locales;
-		let footer = locale.getSubValue("embeds", "openTicket", "footer", "text").replace("ticket.pm", "");
+		let footer = locale.getSubValue("embeds", "openTicket", "footer", "text").replace("", "");
 		// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
-		footer = `ticket.pm ${footer.trim() !== "" ? `- ${footer}` : ""}`; // Please respect the LICENSE :D
+		footer = `${footer.trim() !== "" ? `${footer}` : ""}`; // Please respect the LICENSE :D
 		// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
 		const embed = new EmbedBuilder({
 			...locale.getSubRawValue("embeds.openTicket") as object,
@@ -63,14 +63,20 @@ export default class ReadyEvent extends BaseEvent {
 				locale.getNoErrorSubValue("embeds", "openTicket", "color") as ColorResolvable | undefined ??
 				this.client.config.mainColor
 			)
+		    .setThumbnail('https://hastastudios.com.br/Bot/hstudios.png')
+			.setImage('https://hastastudios.com.br/Bot/ticket.png')
 			.setFooter({
 				text: footer,
-				iconURL: locale.getNoErrorSubValue("embeds.openTicket.footer.iconURL")
+				iconURL: ('https://hastastudios.com.br/Bot/hstudios.png')
 			});
 
-		const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
-			new ButtonBuilder().setCustomId("openTicket").setLabel(this.client.locales.getSubValue("other", "openTicketButtonMSG")).setStyle(ButtonStyle.Primary)
-		);
+const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
+    new ButtonBuilder()
+        .setCustomId("openTicket")
+        .setLabel(this.client.locales.getSubValue("other", "openTicketButtonMSG"))
+        .setStyle(ButtonStyle.Primary)
+        .setEmoji({ id: '1309304242057777162', name: 'ticket' })
+);
 
 		try {
 			// Fetch Message object and return undefined if not found

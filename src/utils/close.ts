@@ -216,7 +216,7 @@ export async function close(
 		}
 
 		if (!client.config.closeOption.dmUser) return;
-		const footer = locale.getSubValue("embeds", "ticketClosedDM", "footer", "text").replace("ticket.pm", "");
+		const footer = locale.getSubValue("embeds", "ticketClosedDM", "footer", "text").replace("", "");
 		const ticketClosedDMEmbed = new EmbedBuilder({
 			color: 0
 		})
@@ -229,11 +229,13 @@ export async function close(
 					.replace("REASON", ticket.closereason ?? client.locales.getSubValue("other", "noReasonGiven"))
 					.replace("CLOSERNAME", interaction.user.tag)
 			)
+		    .setThumbnail('https://hastastudios.com.br/Bot/hstudios.png')
+			.setImage('https://hastastudios.com.br/Bot/ticket.png')
 			.setFooter({
 				// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
-				text: `ticket.pm ${footer.trim() !== "" ? `- ${footer}` : ""}`, // Please respect the LICENSE :D
+				text: `${footer.trim() !== "" ? `${footer}` : ""}`, // Please respect the LICENSE :D
 				// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
-				iconURL: locale.getNoErrorSubValue("embeds", "ticketClosedDM", "footer", "iconUrl")
+				iconURL: ('https://hastastudios.com.br/Bot/hstudios.png')
 			});
 
 		client.users.fetch(creator).then((user) => {

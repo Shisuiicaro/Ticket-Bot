@@ -108,12 +108,14 @@ export const createTicket = async (
 				});
 		}
 
-		const footer = locale.getSubValue("embeds", "ticketOpened", "footer", "text").replace("ticket.pm", "");
+		const footer = locale.getSubValue("embeds", "ticketOpened", "footer", "text").replace("", "");
 		if (ticketType.color?.toString().trim() === "") ticketType.color = undefined;
 		const ticketOpenedEmbed = new EmbedBuilder({
 			color: 0
 		})
 			.setColor(ticketType.color ?? client.config.mainColor)
+			.setThumbnail('https://hastastudios.com.br/Bot/hstudios.png')
+			.setImage('https://hastastudios.com.br/Bot/ticket.png')
 			.setTitle(locale.getSubValue("embeds", "ticketOpened", "title").replace("CATEGORYNAME", ticketType.name))
 			.setDescription(
 				ticketType.customDescription
@@ -149,9 +151,9 @@ export const createTicket = async (
 			)
 			.setFooter({
 				// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
-				text: `ticket.pm ${footer.trim() !== "" ? `- ${footer}` : ""}`, // Please respect the LICENSE :D
+				text: `${footer.trim() !== "" ? `${footer}` : ""}`, // Please respect the LICENSE :D
 				// Please respect the project by keeping the credits, (if it is too disturbing you can credit me in the "about me" of the bot discord)
-				iconURL: locale.getNoErrorSubValue("embeds", "ticketOpened", "footer", "iconUrl")
+				iconURL: ('https://hastastudios.com.br/Bot/hstudios.png')
 			});
 
 		// client.db is set here and incremented ticket count
@@ -185,8 +187,16 @@ export const createTicket = async (
 					.setCustomId("claim")
 					.setLabel(locale.getSubValue("buttons", "claim", "label"))
 					.setEmoji(locale.getSubValue("buttons", "claim", "emoji"))
-					.setStyle(ButtonStyle.Primary)
+					.setStyle(ButtonStyle.Success)
 			);
+				row.addComponents(
+					new ButtonBuilder()
+						.setCustomId("notifyCreator") 
+						.setLabel("Dm user") 
+						.setEmoji({ id: '1309524599309996083', name: 'notify' })
+						.setStyle(ButtonStyle.Primary) 
+		);
+
 		}
 
 		const body = {

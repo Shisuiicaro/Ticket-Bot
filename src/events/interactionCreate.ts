@@ -13,6 +13,7 @@ import { log } from "../utils/logs";
 import { createTicket } from "../utils/createTicket";
 import { close } from "../utils/close";
 import { claim } from "../utils/claim";
+import { dmUser } from "../utils/dmUser";
 import { closeAskReason } from "../utils/close_askReason";
 import { deleteTicket } from "../utils/delete";
 import { BaseEvent, ExtendedClient } from "../structure";
@@ -149,6 +150,10 @@ export default class InteractionCreateEvent extends BaseEvent {
 
 			if (interaction.customId === "deleteTicket") {
 				deleteTicket(interaction, this.client);
+			}
+
+			if (interaction.customId === "notifyCreator") {
+				await dmUser(interaction, this.client);
 			}
 		}
 
